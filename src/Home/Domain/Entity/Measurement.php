@@ -1,8 +1,8 @@
 <?php
 
-// namespace App\Entity;
+namespace App\Home\Domain\Entity;
 
-use App\Repository\MeasurementRepository;
+use App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

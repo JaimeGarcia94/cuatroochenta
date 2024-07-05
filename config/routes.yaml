@@ -4,4 +4,8 @@ App\Auth\Infraestructure\Symfony\Controller\AuthController:
 
 App\Auth\Infraestructure\Symfony\Controller\UserController:
     resource: App\Auth\Infraestructure\Symfony\Controller\UserController
-    type: attribute    
+    type: attribute
+
+App\Home\Infraestructure\Symfony\Controller\MeasurementController:
+    resource: App\Home\Infraestructure\Symfony\Controller\MeasurementController
+    type: attribute        

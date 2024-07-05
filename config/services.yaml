@@ -22,11 +22,16 @@ services:
         arguments:
             $userRepository: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'
 
-    App\Auth\Infraestructure\Doctrine\Repository\UserRepository:
+    App\Home\Application\Service\MeasurementService:
+        # arguments:
+        #     $measurementRepository: '@App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository'        
+
+    App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository:
         arguments: 
             $registry: '@doctrine'
 
-    App\Auth\Domain\RepositoryInterface\UserRepositoryInterface: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'    
+    App\Auth\Domain\RepositoryInterface\UserRepositoryInterface: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'
+    App\Home\Domain\RepositoryInterface\MeasurementRepositoryInterface: '@App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository'    
 
     # App\Auth\Domain\Repository\TipoSensorRepositoryInterface: '@App\Infraestructure\Doctrine\Repository\TipoSensorRepository'
     # App\Domain\Repository\SensorRepositoryInterface: '@App\Infraestructure\Doctrine\Repository\SensorRepository'    

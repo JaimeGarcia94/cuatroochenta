@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Repository;
+namespace App\Home\Infraestructure\Doctrine\Repository;
 
-// use App\Entity\Measurement;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Home\Domain\Entity\Measurement;
+use App\Home\Domain\RepositoryInterface\MeasurementRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Measurement>
  */
-class MeasurementRepository extends ServiceEntityRepository
+class MeasurementRepository extends ServiceEntityRepository implements MeasurementRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
