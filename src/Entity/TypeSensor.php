@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+// namespace App\Entity;
 
 use App\Repository\TypeSensorRepository;
 use Doctrine\Common\Collections\ArrayCollection;

@@ -10,21 +10,26 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
+        # bind:
+        #     $userRepositoryInterface: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'            
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'          
 
     App\Auth\Application\Service\UserService:
-        arguments: ['@some_dependency']
+        arguments:
+            $userRepository: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'
 
-    App\Auth\Infrastructure\Doctrine\Repository\UserRepository:
-        arguments: ['@doctrine.orm.entity_manager'] 
+    App\Auth\Infraestructure\Doctrine\Repository\UserRepository:
+        arguments: 
+            $registry: '@doctrine'
+
+    App\Auth\Domain\RepositoryInterface\UserRepositoryInterface: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'    
+
+    # App\Auth\Domain\Repository\TipoSensorRepositoryInterface: '@App\Infraestructure\Doctrine\Repository\TipoSensorRepository'
+    # App\Domain\Repository\SensorRepositoryInterface: '@App\Infraestructure\Doctrine\Repository\SensorRepository'    
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
