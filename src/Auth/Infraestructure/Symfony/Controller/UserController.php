@@ -20,7 +20,7 @@ class UserController extends AbstractController
     #[Route('/registry', name: 'app_user_registry')]
     public function registry(): Response
     {
-        return $this->render('user/registry.html.twig', [
+        return $this->render('auth/registry.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
