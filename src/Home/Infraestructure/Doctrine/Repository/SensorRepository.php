@@ -1,40 +1,40 @@
 <?php
 
-namespace App\Repository;
+namespace App\Home\Infraestructure\Doctrine\Repository;
 
-// use App\Entity\TypeSensor;
+use App\Entity\Sensor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<TypeSensor>
+ * @extends ServiceEntityRepository<Sensor>
  */
-class TypeSensorRepository extends ServiceEntityRepository
+class SensorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TypeSensor::class);
+        parent::__construct($registry, Sensor::class);
     }
 
     //    /**
-    //     * @return TypeSensor[] Returns an array of TypeSensor objects
+    //     * @return Sensor[] Returns an array of Sensor objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
+    //            ->orderBy('s.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?TypeSensor
+    //    public function findOneBySomeField($value): ?Sensor
     //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

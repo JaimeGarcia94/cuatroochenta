@@ -1,8 +1,10 @@
 <?php
 
-// namespace App\Entity;
+namespace App\Home\Domain\Entity;
 
-use App\Repository\SensorRepository;
+use App\Home\Infraestructure\Doctrine\Repository\SensorRepository;
+use App\Auth\Domain\Entity\User;
+use App\Home\Domain\Entity\TypeSensor;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SensorRepository::class)]

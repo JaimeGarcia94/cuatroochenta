@@ -1,8 +1,9 @@
 <?php
 
-// namespace App\Entity;
+namespace App\Home\Domain\Entity;
 
-use App\Repository\TypeSensorRepository;
+use App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository;
+use App\Home\Domain\Entity\Sensor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

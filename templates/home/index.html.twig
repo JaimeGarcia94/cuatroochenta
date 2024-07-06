@@ -3,9 +3,11 @@
 
 {% block body %}
 <div class="container">
-	<h1 class="mb-5">Listado mediciones</h1>
+	<h1 class="mb-5 mt-2">Listado mediciones</h1>
     
     <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#openModalCreate">Crear nueva medición</button>
+
+    <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#openModalSensor">Dar de alta sensor</button>
 
     <table id="measurements-table" class="w-100">
         <thead>
@@ -23,8 +25,6 @@
         <tbody>
         </tbody>
     </table>
-
-    <div id="initModal"></div>
 
     <div class="modal fade" id="openModalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="openModalCreateLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -86,6 +86,38 @@
                             <button type="submit" class="btn border btn-primary"><i class="fas fa-plus"></i> Crear</button>
                         </div>
                     </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="openModalSensor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="openModalSensorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="openModalSensorLabel">Dar alta sensor</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                     <form action="#" method="post">
+                        <div class="mb-3">
+                            <label for="valor">Valor:</label>
+                            <input type="number" id="valor" class="form-control" name="valor" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="typeSensor">Tipo sensor:</label>
+                            <select class="form-select" aria-label="Default select" id="typeSensor" name="typeSensor">
+                                <option selected>Selecciona un tipo de sensor</option>
+                                {% for type in typeSensor %}
+                                    <option value="{{ type.id }}">{{ type.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn border" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn border btn-primary"><i class="fas fa-plus"></i> Crear</button>
+                        </div>
+                    </form>     
                 </div>
             </div>
         </div>

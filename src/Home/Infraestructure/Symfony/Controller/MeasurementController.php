@@ -3,6 +3,7 @@
 namespace App\Home\Infraestructure\Symfony\Controller;
 
 use App\Home\Application\Service\MeasurementService;
+use App\Home\Application\Service\TypeSensorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,16 +13,25 @@ use Symfony\Component\Routing\Attribute\Route;
 class MeasurementController extends AbstractController
 {
     private $measurementService;
+    private $typeSensorService;
 
-    public function __construct(MeasurementService $measurementService)
+    public function __construct(MeasurementService $measurementService, TypeSensorService $typeSensorService)
     {
         $this->measurementService = $measurementService;
+        $this->typeSensorService = $typeSensorService;
     }
 
     #[Route('/home', name: 'app_home')]
     public function home(): Response
     {
-        return $this->render('home/index.html.twig');
+        $typeSensor = $this->typeSensorService->getAllTypeSensor();
+
+        // dd($typeSensor);
+        // die();
+
+        return $this->render('home/index.html.twig', [
+            'typeSensor' => $typeSensor
+        ]);
     }
 
     #[Route('/measurements', name: 'app_get_measurement', methods: ["GET"])]

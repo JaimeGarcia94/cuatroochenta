@@ -28,17 +28,25 @@ services:
 
     App\Home\Application\Service\MeasurementService:
         arguments:
-            $measurementRepository: '@App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository'  
+            $measurementRepository: '@App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository'
+
+    App\Home\Application\Service\TypeSensorService:
+        arguments:
+            $typeSensorRepositoryInterface: '@App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository'          
 
     App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository:
         arguments: 
-            $entityManager: '@doctrine.orm.entity_manager'              
+            $entityManager: '@doctrine.orm.entity_manager'
+
+    App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository:
+        arguments: 
+            $entityManager: '@doctrine.orm.entity_manager'                      
 
     App\Auth\Domain\RepositoryInterface\UserRepositoryInterface: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'
     App\Home\Domain\RepositoryInterface\MeasurementRepositoryInterface: '@App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository'    
 
-    # App\Auth\Domain\Repository\TipoSensorRepositoryInterface: '@App\Infraestructure\Doctrine\Repository\TipoSensorRepository'
-    # App\Domain\Repository\SensorRepositoryInterface: '@App\Infraestructure\Doctrine\Repository\SensorRepository'    
+    App\Home\Domain\Repository\TypeSensorRepositoryInterface: '@App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository'
+    App\Home\Domain\Repository\SensorRepositoryInterface: '@App\Home\Infraestructure\Doctrine\Repository\SensorRepository'    
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
