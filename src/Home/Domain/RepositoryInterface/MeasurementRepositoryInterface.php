@@ -6,5 +6,5 @@ use App\Home\Domain\Entity\Measurement;
 
 interface MeasurementRepositoryInterface
 {
-    
+    public function save(Measurement $measurement): void;
 }

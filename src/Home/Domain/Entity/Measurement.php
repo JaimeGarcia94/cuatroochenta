@@ -3,6 +3,7 @@
 namespace App\Home\Domain\Entity;
 
 use App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository;
+use App\Auth\Domain\Entity\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

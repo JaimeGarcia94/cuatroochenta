@@ -5,41 +5,24 @@ namespace App\Home\Infraestructure\Doctrine\Repository;
 use App\Home\Domain\Entity\Measurement;
 use App\Home\Domain\RepositoryInterface\MeasurementRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 
-/**
- * @extends ServiceEntityRepository<Measurement>
- */
-class MeasurementRepository extends ServiceEntityRepository implements MeasurementRepositoryInterface
+class MeasurementRepository extends EntityRepository implements MeasurementRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, Measurement::class);
+        $this->entityManager = $entityManager;
+
+        $class = $entityManager->getClassMetadata(Measurement::class);
+        parent::__construct($entityManager, $class);
     }
 
-    //    /**
-    //     * @return Measurement[] Returns an array of Measurement objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Measurement
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function save(Measurement $measurement): void
+    {
+        $this->entityManager->persist($measurement);
+        $this->entityManager->flush();
+    }
 }
+

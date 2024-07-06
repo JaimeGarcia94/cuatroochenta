@@ -16,18 +16,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            # App:
-            #     type: attribute
-            #     is_bundle: false
-            #     dir: '%kernel.project_dir%/src/Entity'
-            #     prefix: 'App\Entity'
-            #     alias: App
-            App:
+            Auth:
                 is_bundle: false
                 type: attribute
                 dir: '%kernel.project_dir%/src/Auth/Domain/Entity'
                 prefix: 'App\Auth\Domain\Entity'
-                alias: AppAuthDomainEntity
+                alias: Auth
+            Home:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/src/Home/Domain/Entity'
+                prefix: 'App\Home\Domain\Entity'
+                alias: Home    
 
 when@test:
     doctrine:

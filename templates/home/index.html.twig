@@ -2,10 +2,89 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
+{# <style>
     .container { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-</style>
+</style> #}
 <div class="container">
-	<h1>HOLA HOMEEEE</h1>
+	<h1>Listado mediciones</h1>
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#openModalCreate">Crear nueva medición</button>
+
+    <div id="initModal"></div>
+
+    <div class="modal fade" id="openModalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="openModalCreateLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="openModalCreateLabel">Crear nueva medición</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ path('app_add_measurement') }}" method="post">
+                        <div class="mb-3">
+                            <label for="year">Año:</label>
+                            <input type="number" id="year" class="form-control" name="year" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="variety">Variedad:</label>
+                            <select class="form-select" aria-label="Default select" name="variety" required>
+                                <option selected>Selecciona una variedad</option>
+                                <option value="Merlot">Merlot</option>
+                                <option value="Syrah">Syrah</option>
+                                <option value="Chardonnay">Chardonnay</option>
+                                <option value="Riesling">Riesling</option>
+                                <option value="Albariño">Albariño</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="type">Tipo:</label>
+                            <select class="form-select" aria-label="Default select" name="type" required>
+                                <option selected>Selecciona un tipo</option>
+                                <option value="Rosado">Rosado</option>
+                                <option value="Orange">Orange</option>
+                                <option value="Espumoso">Espumoso</option>
+                                <option value="Dulce">Dulce</option>
+                                <option value="Generoso">Generoso</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="color">Color:</label>
+                            <input type="text" id="color" class="form-control" name="color" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="temperature">Temperatura:</label>
+                            <input type="number" step="0.1" id="temperature" class="form-control" name="temperature" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="graduation">Graduación:</label>
+                            <input type="number" step="0.1" id="graduation" class="form-control" name="graduation" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="ph">pH:</label>
+                            <input type="number" step="0.1" id="ph" class="form-control" name="ph" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="observations">Observaciones:</label>
+                            <textarea id="observations" class="form-control" name="observations"></textarea>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn border" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn border btn-primary"><i class="fas fa-plus"></i> Crear</button>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+</script>
 {% endblock %}
