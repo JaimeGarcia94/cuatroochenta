@@ -19,6 +19,17 @@ class TypeSensorRepository extends EntityRepository implements TypeSensorReposit
         parent::__construct($entityManager, $class);
     }
 
+    public function findById($id): TypeSensor
+    {
+        return $this->createQueryBuilder('w')
+           ->andWhere('w.id = :id')
+           ->setMaxResults(1)
+           ->setParameter('id', $id)
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+    }
+
     public function findByTypeSensor(): array
     {
         return $this->createQueryBuilder('w')

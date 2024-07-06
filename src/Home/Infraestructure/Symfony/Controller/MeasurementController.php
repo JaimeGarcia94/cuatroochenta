@@ -4,6 +4,7 @@ namespace App\Home\Infraestructure\Symfony\Controller;
 
 use App\Home\Application\Service\MeasurementService;
 use App\Home\Application\Service\TypeSensorService;
+use App\Home\Application\Service\SensorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,20 +15,19 @@ class MeasurementController extends AbstractController
 {
     private $measurementService;
     private $typeSensorService;
+    private $sensorService;
 
-    public function __construct(MeasurementService $measurementService, TypeSensorService $typeSensorService)
+    public function __construct(MeasurementService $measurementService, TypeSensorService $typeSensorService, SensorService $sensorService)
     {
         $this->measurementService = $measurementService;
         $this->typeSensorService = $typeSensorService;
+        $this->sensorService = $sensorService;
     }
 
     #[Route('/home', name: 'app_home')]
     public function home(): Response
     {
         $typeSensor = $this->typeSensorService->getAllTypeSensor();
-
-        // dd($typeSensor);
-        // die();
 
         return $this->render('home/index.html.twig', [
             'typeSensor' => $typeSensor
@@ -75,6 +75,22 @@ class MeasurementController extends AbstractController
         ];
 
         $this->measurementService->addMeasurement($data);
+
+        return $this->redirectToRoute('app_home');
+        // return new Response('Measurement added', Response::HTTP_CREATED);
+    }
+
+    #[Route('/addSensor', name: 'app_add_sensor', methods: ["POST"])]
+    public function addSensor(Request $request): Response
+    {
+        $user = $this->getUser();
+        $data = [
+            'user' => $user,
+            'value' => $request->get('value'),
+            'typeSensor' => $request->get('typeSensor'),
+        ];
+
+        $this->sensorService->addSensor($data);
 
         return $this->redirectToRoute('app_home');
         // return new Response('Measurement added', Response::HTTP_CREATED);

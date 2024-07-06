@@ -32,7 +32,12 @@ services:
 
     App\Home\Application\Service\TypeSensorService:
         arguments:
-            $typeSensorRepositoryInterface: '@App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository'          
+            $typeSensorRepository: '@App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository'
+
+    App\Home\Application\Service\SensorService:
+        arguments:
+            $sensorRepository: '@App\Home\Infraestructure\Doctrine\Repository\SensorRepository'
+            $typeSensorRepository: '@App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository'                   
 
     App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository:
         arguments: 
@@ -40,7 +45,11 @@ services:
 
     App\Home\Infraestructure\Doctrine\Repository\TypeSensorRepository:
         arguments: 
-            $entityManager: '@doctrine.orm.entity_manager'                      
+            $entityManager: '@doctrine.orm.entity_manager'
+
+    App\Home\Infraestructure\Doctrine\Repository\SensorRepository:
+        arguments: 
+            $entityManager: '@doctrine.orm.entity_manager'                              
 
     App\Auth\Domain\RepositoryInterface\UserRepositoryInterface: '@App\Auth\Infraestructure\Doctrine\Repository\UserRepository'
     App\Home\Domain\RepositoryInterface\MeasurementRepositoryInterface: '@App\Home\Infraestructure\Doctrine\Repository\MeasurementRepository'    

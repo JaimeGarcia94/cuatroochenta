@@ -7,16 +7,16 @@ use App\Home\Domain\RepositoryInterface\TypeSensorRepositoryInterface;
 
 class TypeSensorService
 {
-    private $typeSensorRepositoryInterface;
+    private $typeSensorRepository;
 
-    public function __construct(TypeSensorRepositoryInterface $typeSensorRepositoryInterface)
+    public function __construct(TypeSensorRepositoryInterface $typeSensorRepository)
     {
-        $this->typeSensorRepositoryInterface = $typeSensorRepositoryInterface;
+        $this->typeSensorRepository = $typeSensorRepository;
     }
 
     public function getAllTypeSensor(): array
     {
-        $result = $this->typeSensorRepositoryInterface->findByTypeSensor();
+        $result = $this->typeSensorRepository->findByTypeSensor();
 
         return $result;
     }

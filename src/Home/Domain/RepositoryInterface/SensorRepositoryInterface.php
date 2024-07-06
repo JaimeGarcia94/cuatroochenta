@@ -6,5 +6,5 @@ use App\Home\Domain\Entity\Sensor;
 
 interface SensorRepositoryInterface
 {
-    // public function findByTypeSensor(): array;
+    public function save(Sensor $sensor): void;
 }

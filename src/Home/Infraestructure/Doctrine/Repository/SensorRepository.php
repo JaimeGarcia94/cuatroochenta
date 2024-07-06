@@ -2,42 +2,27 @@
 
 namespace App\Home\Infraestructure\Doctrine\Repository;
 
-use App\Entity\Sensor;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Home\Domain\Entity\Sensor;
+use App\Home\Domain\RepositoryInterface\SensorRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 
-/**
- * @extends ServiceEntityRepository<Sensor>
- */
-class SensorRepository extends ServiceEntityRepository
+class SensorRepository extends EntityRepository implements SensorRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, Sensor::class);
+        $this->entityManager = $entityManager;
+
+        $class = $entityManager->getClassMetadata(Sensor::class);
+        parent::__construct($entityManager, $class);
     }
 
-    //    /**
-    //     * @return Sensor[] Returns an array of Sensor objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Sensor
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function save(Sensor $sensor): void
+    {
+        $this->entityManager->persist($sensor);
+        $this->entityManager->flush();
+    }
 }
+
