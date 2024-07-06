@@ -6,5 +6,6 @@ use App\Home\Domain\Entity\Measurement;
 
 interface MeasurementRepositoryInterface
 {
+    public function findByMeasurements($user): array;
     public function save(Measurement $measurement): void;
 }

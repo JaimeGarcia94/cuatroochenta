@@ -2,13 +2,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{# <style>
-    .container { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-</style> #}
 <div class="container">
-	<h1>Listado mediciones</h1>
+	<h1 class="mb-5">Listado mediciones</h1>
     
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#openModalCreate">Crear nueva medición</button>
+    <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#openModalCreate">Crear nueva medición</button>
+
+    <table id="measurements-table" class="w-100">
+        <thead>
+            <tr>
+                <th>Año</th>
+                <th>Variedad</th>
+                <th>Tipo</th>
+                <th>Color</th>
+                <th>Temperatura</th>
+                <th>Graduación</th>
+                <th>pH</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
     <div id="initModal"></div>
 
@@ -84,7 +98,29 @@
 {% block javascripts %}
 <script type="text/javascript">
 $(document).ready(function(){
+    var url = "{{ path('app_get_measurement') }}";    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#measurements-table tbody');
+            tableBody.innerHTML = '';
 
+            data.forEach(measurement => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${measurement.year}</td>
+                    <td>${measurement.variety}</td>
+                    <td>${measurement.type}</td>
+                    <td>${measurement.color}</td>
+                    <td>${measurement.temperature}</td>
+                    <td>${measurement.graduation}</td>
+                    <td>${measurement.ph}</td>
+                    <td>${measurement.observations}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching measurements:', error));
 });
 </script>
 {% endblock %}

@@ -14,11 +14,15 @@ class MeasurementService
         $this->measurementRepository = $measurementRepository;
     }
 
+    public function getAllMeasurements($user): array
+    {
+        $result = $this->measurementRepository->findByMeasurements($user);
+
+        return $result;
+    }
+
     public function addMeasurement($data): Measurement
     {
-
-        // dd($data);
-        // die();
         $measurement = new Measurement();
         $measurement->setUser($data['user']);
         $measurement->setYear($data['year']);

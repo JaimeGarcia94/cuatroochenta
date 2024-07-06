@@ -19,6 +19,17 @@ class MeasurementRepository extends EntityRepository implements MeasurementRepos
         parent::__construct($entityManager, $class);
     }
 
+    public function findByMeasurements($user): array
+    {
+        return $this->createQueryBuilder('w')
+                ->andWhere('w.user = :user')
+                ->orderBy('w.id','DESC')
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->getResult()
+        ;
+    }
+
     public function save(Measurement $measurement): void
     {
         $this->entityManager->persist($measurement);

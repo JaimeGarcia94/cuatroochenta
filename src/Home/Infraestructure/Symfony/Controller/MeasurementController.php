@@ -6,24 +6,46 @@ use App\Home\Application\Service\MeasurementService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Security;
 
 class MeasurementController extends AbstractController
 {
     private $measurementService;
-    private $security;
 
-    public function __construct(MeasurementService $measurementService, Security $security)
+    public function __construct(MeasurementService $measurementService)
     {
         $this->measurementService = $measurementService;
-        $this->security = $security;
     }
 
     #[Route('/home', name: 'app_home')]
     public function home(): Response
     {
         return $this->render('home/index.html.twig');
+    }
+
+    #[Route('/measurements', name: 'app_get_measurement', methods: ["GET"])]
+    public function getMeasurements(): JsonResponse
+    {
+        $user = $this->getUser();
+        $measurements = $this->measurementService->getAllMeasurements($user);
+
+        $data = [];
+
+        foreach ($measurements as $measurement) {
+            $data[] = [
+                'year' => $measurement->getYear(),
+                'variety' => $measurement->getVariety(),
+                'type' => $measurement->getType(),
+                'color' => $measurement->getColor(),
+                'temperature' => $measurement->getTemperature(),
+                'graduation' => $measurement->getGraduation(),
+                'ph' => $measurement->getPh(),
+                'observations' => $measurement->getObservations(),
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 
     #[Route('/addMeasurement', name: 'app_add_measurement', methods: ["POST"])]
@@ -43,6 +65,7 @@ class MeasurementController extends AbstractController
         ];
 
         $this->measurementService->addMeasurement($data);
+
         return $this->redirectToRoute('app_home');
         // return new Response('Measurement added', Response::HTTP_CREATED);
     }
