@@ -26,8 +26,8 @@ class UserControllerTest extends WebTestCase
     {
         $crawler = $this->client->request('POST', '/save');
         $form = $crawler->selectButton('button')->form([
-            'email' => 'test@example.com',
-            'password' => 'password',
+            '_username' => 'test@example.com',
+            '_password' => 'password',
         ]);
         $this->client->submit($form);
 
