@@ -25,21 +25,19 @@ class UserControllerTest extends WebTestCase
     public function testUserCanRegister()
     {
         $crawler = $this->client->request('POST', '/save');
-        $form = $crawler->selectButton('Register')->form([
+        $form = $crawler->selectButton('button')->form([
             'email' => 'test@example.com',
             'password' => 'password',
-            'confirm_password' => 'password',
         ]);
         $this->client->submit($form);
 
         $this->client->followRedirect();
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', '???');
+        $this->assertSelectorTextContains('h1', 'Login');
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-        // Limpiar la base de datos o realizar otras tareas de limpieza si es necesario
     }
 }

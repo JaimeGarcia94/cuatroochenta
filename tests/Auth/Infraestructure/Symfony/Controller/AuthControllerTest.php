@@ -24,16 +24,8 @@ class AuthControllerTest extends WebTestCase
 
     public function testUserCanLogin()
     {
-        // Primero registramos un usuario
-        $this->client->request('POST', '/register', [
-            'email' => 'login@example.com',
-            'password' => 'password',
-            'confirm_password' => 'password',
-        ]);
-
-        // Ahora intentamos iniciar sesión
         $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->selectButton('Login')->form([
+        $form = $crawler->selectButton('button')->form([
             '_username' => 'login@example.com',
             '_password' => 'password',
         ]);
@@ -41,7 +33,7 @@ class AuthControllerTest extends WebTestCase
 
         $this->client->followRedirect();
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Home');
+        $this->assertSelectorTextContains('h1', 'Listado mediciones');
     }
 
     protected function tearDown(): void
