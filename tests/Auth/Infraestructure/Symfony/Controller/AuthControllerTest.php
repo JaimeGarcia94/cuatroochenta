@@ -39,6 +39,5 @@ class AuthControllerTest extends WebTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        // Limpiar la base de datos o realizar otras tareas de limpieza si es necesario
     }
 }
