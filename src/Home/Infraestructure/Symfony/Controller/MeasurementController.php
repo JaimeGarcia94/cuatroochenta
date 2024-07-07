@@ -77,7 +77,6 @@ class MeasurementController extends AbstractController
         $this->measurementService->addMeasurement($data);
 
         return $this->redirectToRoute('app_home');
-        // return new Response('Measurement added', Response::HTTP_CREATED);
     }
 
     #[Route('/addSensor', name: 'app_add_sensor', methods: ["POST"])]
@@ -93,6 +92,5 @@ class MeasurementController extends AbstractController
         $this->sensorService->addSensor($data);
 
         return $this->redirectToRoute('app_home');
-        // return new Response('Measurement added', Response::HTTP_CREATED);
     }
 }

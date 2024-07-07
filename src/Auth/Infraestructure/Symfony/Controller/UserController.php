@@ -20,9 +20,7 @@ class UserController extends AbstractController
     #[Route('/registry', name: 'app_user_registry')]
     public function registry(): Response
     {
-        return $this->render('auth/registry.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        return $this->render('auth/registry.html.twig');
     }
 
     #[Route('/save', name: 'app_user_save_registry')]
@@ -31,10 +29,11 @@ class UserController extends AbstractController
         $email = $request->get('_username');
         $password = $request->get('_password');
         $this->userService->register($email, $password);
-        return new Response('User registered', Response::HTTP_CREATED);
+        
+        return $this->redirectToRoute('app_login');
     }
 
-    #[Route('/back', name: 'backLogin')]
+    #[Route('/back', name: 'app_back_login')]
     public function backLogin()
     {
         return $this->redirectToRoute('app_login');

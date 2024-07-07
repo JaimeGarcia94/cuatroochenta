@@ -4,6 +4,7 @@ namespace App\Auth\Domain\Entity;
 
 use App\Auth\Infraestructure\Doctrine\Repository\UserRepository;
 use App\Home\Domain\Entity\Measurement;
+use App\Home\Domain\Entity\Sensor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,11 +35,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    // /**
-    //  * @var Collection<int, Sensor>
-    //  */
-    // #[ORM\OneToMany(targetEntity: Sensor::class, mappedBy: 'user', orphanRemoval: true)]
-    // private Collection $sensors;
+    /**
+     * @var Collection<int, Sensor>
+     */
+    #[ORM\OneToMany(targetEntity: Sensor::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $sensors;
 
     /**
      * @var Collection<int, Measurement>
